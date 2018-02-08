@@ -4,27 +4,33 @@
  * Email: dan@sledro.com
  */
 
-import static org.junit.Assert.*;
-import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class HaydenDanielTestTask1 {
 
-	//Test rate contains valid arguments
+	ArrayList<Period> discountPeriods = new ArrayList<Period>();
+	ArrayList<Period> normalPeriods = new ArrayList<Period>();
+	
+	//Create new Period objects and add to arrays
+	public void setup(){
+	Period discountPeriod = new Period(17,18);
+	discountPeriods.add(discountPeriod);
+	
+	Period normalPeriod = new Period(14,17);
+	normalPeriods.add(normalPeriod);
+	}
+	
+	//normalRate > 0
     @org.junit.Test(expected = IllegalArgumentException.class)
-    public void nullValuesInputted() throws Exception {
-    	
-    		BigDecimal normalRate = new BigDecimal("2.00");
-    		BigDecimal discountedRate = new BigDecimal("4.00");
-    		ArrayList<Period> discountPeriods = new ArrayList<Period>();
-    		ArrayList<Period> normalPeriods = new ArrayList<Period>();
-    		Period discountPeriod1 = new Period(3,5);
-    		Period discountPeriod2 = new Period(5,6);
-    		discountPeriods.add(discountPeriod1);
-    		discountPeriods.add(discountPeriod2);
-        Rate std = new Rate(CarParkKind.STAFF, normalRate, discountedRate, discountPeriods, normalPeriods);
+    public void normalRateGraterThanZero(){
+        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2), new BigDecimal(0), discountPeriods, normalPeriods);
     }
     
-
+    //normalRate > discountRate
+    @org.junit.Test
+    public void normalRateGreaterThanDiscountRate(){	
+       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(6),new BigDecimal(5),discountPeriods,normalPeriods);
+    }
+    
 }
