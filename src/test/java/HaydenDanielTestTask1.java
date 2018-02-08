@@ -4,8 +4,12 @@
  * Email: dan@sledro.com
  */
 
+import static org.junit.Assert.assertEquals;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import static org.junit.Assert.*;
+
+import org.junit.Test;
 
 public class HaydenDanielTestTask1 {
 
@@ -14,23 +18,47 @@ public class HaydenDanielTestTask1 {
 	
 	//Create new Period objects and add to arrays
 	public void setup(){
-	Period discountPeriod = new Period(17,18);
+	Period discountPeriod = new Period(8,9);
 	discountPeriods.add(discountPeriod);
 	
-	Period normalPeriod = new Period(14,17);
+	Period normalPeriod = new Period(11,19);
 	normalPeriods.add(normalPeriod);
 	}
 	
-	//normalRate > 0
-    @org.junit.Test(expected = IllegalArgumentException.class)
+	//Test 1
+	@org.junit.Test
     public void normalRateGraterThanZero(){
-        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2), new BigDecimal(0), discountPeriods, normalPeriods);
+        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1), new BigDecimal(1), discountPeriods, normalPeriods);
     }
     
-    //normalRate > discountRate
-    @org.junit.Test
+	//Test 2
+	@org.junit.Test
+    public void normalRateLessThanZero(){
+        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(-1), new BigDecimal(1), discountPeriods, normalPeriods);
+    }
+    
+	//Test 3
+	@org.junit.Test
+    public void discountRateGraterThanZero(){
+        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1), new BigDecimal(1), discountPeriods, normalPeriods);
+    }
+    
+	//Test 4
+	@org.junit.Test
+    public void discountRateLessThanZero(){
+        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1), new BigDecimal(-1), discountPeriods, normalPeriods);
+    }
+    
+    //Test 5
+	@org.junit.Test
     public void normalRateGreaterThanDiscountRate(){	
-       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(6),new BigDecimal(5),discountPeriods,normalPeriods);
+       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2),new BigDecimal(1),discountPeriods,normalPeriods);
+    }
+    
+    //Test 6
+	@org.junit.Test
+    public void normalRateLessThanDiscountRate(){	
+       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(2),discountPeriods,normalPeriods);
     }
     
 }
