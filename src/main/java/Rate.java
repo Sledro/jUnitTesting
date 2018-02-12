@@ -15,5 +15,13 @@ public class Rate {
 		if (normalRate.compareTo(BigDecimal.ZERO) < 1) {
             throw new IllegalArgumentException();
         }
+		if (discountedRate.compareTo(BigDecimal.ZERO) < 1) {
+            throw new IllegalArgumentException();
+        }
+	}
+
+	public Object calculate(Period stayPeriod) {
+		// TODO Auto-generated method stub
+		return stayPeriod;
 	}
 }
