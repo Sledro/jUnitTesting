@@ -16,6 +16,9 @@ public class HaydenDanielTestTask1 {
 	ArrayList<Period> normalPeriods = new ArrayList<Period>();
     BigDecimal nullValueBigDecimal;
     Period period;
+	int i;
+	int x;
+	
 	//Create new Period objects and add to arrays
 	public void setup(){
 	Period discountPeriod = new Period(8,9);
@@ -29,35 +32,35 @@ public class HaydenDanielTestTask1 {
 	//Check that STAFF is valid and constructor runs
 	@org.junit.Test
     public void staffEnum(){
-        new Rate(CarParkKind.STAFF, new BigDecimal(1), new BigDecimal(1), discountPeriods, normalPeriods);
+        new Rate(CarParkKind.STAFF, new BigDecimal(2), new BigDecimal(1), discountPeriods, normalPeriods);
     }
     
 	//Test 2
 	//Check that STUDENT is valid and constructor runs
     @org.junit.Test
     public void studentEnum(){
-        new Rate(CarParkKind.STUDENT, new BigDecimal(1), new BigDecimal(1), discountPeriods, normalPeriods);
+        new Rate(CarParkKind.STUDENT, new BigDecimal(2), new BigDecimal(1), discountPeriods, normalPeriods);
     }
     
 	//Test 3
 	//Check that MANAGEMENT is valid and constructor runs
     @org.junit.Test
     public void managementEnum(){
-        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1), new BigDecimal(1), discountPeriods, normalPeriods);
+        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2), new BigDecimal(1), discountPeriods, normalPeriods);
     }
     
 	//Test 4
 	//Check that VISITOR is valid and constructor runs
     @org.junit.Test
     public void visitorEnum(){
-        new Rate(CarParkKind.VISITOR, new BigDecimal(1), new BigDecimal(1), discountPeriods, normalPeriods);
+        new Rate(CarParkKind.VISITOR, new BigDecimal(2), new BigDecimal(1), discountPeriods, normalPeriods);
     }
 	
 	//Test 5
 	//Check that the normalRate > 0.
 	@org.junit.Test
     public void normalRateGraterThanZero(){
-        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1), new BigDecimal(1), discountPeriods, normalPeriods);
+        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2), new BigDecimal(1), discountPeriods, normalPeriods);
     }
     
 	//Test 6
@@ -90,14 +93,14 @@ public class HaydenDanielTestTask1 {
     
 	//Test 10
 	//Check that if normalRate is null, an IllegalArgumentException exception will be thrown.
-	@org.junit.Test (expected = NullPointerException.class)
+	@org.junit.Test (expected = IllegalArgumentException.class)
     public void normalRateNull(){
         new Rate(CarParkKind.MANAGEMENT, nullValueBigDecimal, new BigDecimal(1), discountPeriods, normalPeriods);
     }	
 	
 	//Test 11
 	//Check that if discountRate is null, an IllegalArgumentException exception will be thrown.
-	@org.junit.Test (expected = NullPointerException.class)
+	@org.junit.Test (expected = IllegalArgumentException.class)
     public void discountRateNull(){
         new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1), nullValueBigDecimal, discountPeriods, normalPeriods);
     }	
@@ -111,16 +114,16 @@ public class HaydenDanielTestTask1 {
 	
 	//Test 13
 	//Check that if the discount rate max value, test will pass
-	@org.junit.Test
+	@org.junit.Test (expected = IllegalArgumentException.class)
     public void discountRateMaxValue(){
-        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1), new BigDecimal(Integer.MAX_VALUE), discountPeriods, normalPeriods);
+        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2), new BigDecimal(Integer.MAX_VALUE), discountPeriods, normalPeriods);
     }	
 	
 	//Test 14
 	//Check discount rate > 0
 	@org.junit.Test
     public void discountRateGraterThanZero(){
-        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1), new BigDecimal(1), discountPeriods, normalPeriods);
+        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2), new BigDecimal(1), discountPeriods, normalPeriods);
     }
     
 	//Test 15
@@ -132,7 +135,7 @@ public class HaydenDanielTestTask1 {
 	
 	//Test 16
 	//Check that if the discount rate = 0 or throw exception
-	@org.junit.Test (expected = IllegalArgumentException.class)
+	@org.junit.Test 
     public void discountRateEqualToZero(){
         new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1), new BigDecimal(0), discountPeriods, normalPeriods);
     }
@@ -148,7 +151,7 @@ public class HaydenDanielTestTask1 {
 	//Check the normal rate is greater than discounted rate. Catch exception if not.
 	@org.junit.Test (expected = IllegalArgumentException.class)
     public void normalRateLessThanDiscountRate(){	
-       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(2),discountPeriods,normalPeriods);
+       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2),new BigDecimal(2),discountPeriods,normalPeriods);
     }
 	
     //Test 19
@@ -165,17 +168,17 @@ public class HaydenDanielTestTask1 {
 		ArrayList<Period> discountPeriods = new ArrayList<Period>();
 		Period discountPeriod = new Period(0,23);
 		discountPeriods.add(discountPeriod);
-       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(1),discountPeriods,normalPeriods);
+       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2),new BigDecimal(1),discountPeriods,normalPeriods);
     }
 
     //Test 21
 	//Check discountPeriod sets with empty values
-	@org.junit.Test
+	@org.junit.Test (expected = IllegalArgumentException.class)
     public void discountPeriodEmpty(){	
 		ArrayList<Period> discountPeriods = new ArrayList<Period>();
-		Period discountPeriod = new Period();
+		Period discountPeriod = new Period(i,x);
 		discountPeriods.add(discountPeriod);
-       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(1),discountPeriods,normalPeriods);
+       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2),new BigDecimal(1),discountPeriods,normalPeriods);
     }
     
     //Test 22
@@ -185,17 +188,17 @@ public class HaydenDanielTestTask1 {
 		ArrayList<Period> discountPeriods = new ArrayList<Period>();
 		Period discountPeriod = new Period(0,23);
 		discountPeriods.add(discountPeriod);
-       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(1),discountPeriods,normalPeriods);
+       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2),new BigDecimal(1),discountPeriods,normalPeriods);
     }
     
     //Test 23
 	//Check discountPeriod boundary (high)
-    @org.junit.Test (expected = IllegalArgumentException.class)
+    @org.junit.Test 
     public void discountPeriodBounaryHigh(){	
 		ArrayList<Period> discountPeriods = new ArrayList<Period>();
 		Period discountPeriod = new Period(0,24);
 		discountPeriods.add(discountPeriod);
-       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(1),discountPeriods,normalPeriods);
+       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2),new BigDecimal(1),discountPeriods,normalPeriods);
     }
     
     //Test 24
@@ -205,12 +208,12 @@ public class HaydenDanielTestTask1 {
 		ArrayList<Period> discountPeriods = new ArrayList<Period>();
 		ArrayList<Period> normalPeriods = new ArrayList<Period>();
 		Period discountPeriod1 = new Period(8,9);
-		Period discountPeriod2 = new Period(21,00);
+		Period discountPeriod2 = new Period(21,23);
 		discountPeriods.add(discountPeriod1);
 		discountPeriods.add(discountPeriod2);
 		Period normalPeriod1 = new Period(9,21);
 		normalPeriods.add(normalPeriod1);
-       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(1),discountPeriods,normalPeriods);
+       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2),new BigDecimal(1),discountPeriods,normalPeriods);
     }
     
     //Test 25
@@ -225,7 +228,7 @@ public class HaydenDanielTestTask1 {
 		discountPeriods.add(discountPeriod2);
 		Period normalPeriod1 = new Period(21,00);
 		normalPeriods.add(normalPeriod1);
-       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(1),discountPeriods,normalPeriods);
+       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2),new BigDecimal(1),discountPeriods,normalPeriods);
     }
     
     //Test 26
@@ -235,12 +238,12 @@ public class HaydenDanielTestTask1 {
 		ArrayList<Period> discountPeriods = new ArrayList<Period>();
 		ArrayList<Period> normalPeriods = new ArrayList<Period>();
 		Period discountPeriod1 = new Period(8,9);
-		Period discountPeriod2 = new Period(21,00);
+		Period discountPeriod2 = new Period(21,23);
 		discountPeriods.add(discountPeriod1);
 		discountPeriods.add(discountPeriod2);
 		Period normalPeriod1 = new Period(9,21);
 		normalPeriods.add(normalPeriod1);
-       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(1),discountPeriods,normalPeriods);
+       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2),new BigDecimal(1),discountPeriods,normalPeriods);
     }
 
     //Test 27
@@ -255,7 +258,7 @@ public class HaydenDanielTestTask1 {
 		discountPeriods.add(discountPeriod2);
 		Period normalPeriod1 = new Period(9,21);
 		normalPeriods.add(normalPeriod1);
-       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(1),discountPeriods,normalPeriods);
+       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2),new BigDecimal(1),discountPeriods,normalPeriods);
     }
     
     //Test 28
@@ -267,7 +270,7 @@ public class HaydenDanielTestTask1 {
 		discountPeriods.add(null);
 		Period normalPeriod1 = new Period(9,21);
 		normalPeriods.add(normalPeriod1);
-       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(1),discountPeriods,normalPeriods);
+       new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2),new BigDecimal(1),discountPeriods,normalPeriods);
     }
     
     //Test 29
@@ -277,15 +280,15 @@ public class HaydenDanielTestTask1 {
  		ArrayList<Period> normalPeriods = new ArrayList<Period>();
  		Period normalPeriod = new Period(0,23);
  		normalPeriods.add(normalPeriod);
-        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(1),discountPeriods,normalPeriods);
+        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2),new BigDecimal(1),discountPeriods,normalPeriods);
      }
 
     //Test 30
  	//Check normalPeriod sets with empty values
- 	@org.junit.Test
+ 	@org.junit.Test (expected = IllegalArgumentException.class)
      public void normalPeriodEmpty(){	
  		ArrayList<Period> normalPeriods = new ArrayList<Period>();
- 		Period normalPeriod = new Period();
+ 		Period normalPeriod = new Period(i,x);
  		normalPeriods.add(normalPeriod);
         new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(1),discountPeriods,normalPeriods);
      }
@@ -297,7 +300,7 @@ public class HaydenDanielTestTask1 {
  		ArrayList<Period> discountPeriods = new ArrayList<Period>();
  		Period normalPeriod = new Period(0,23);
  		normalPeriods.add(normalPeriod);
-        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(1),discountPeriods,normalPeriods);
+        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2),new BigDecimal(1),discountPeriods,normalPeriods);
      }
      
      //Test 32
@@ -317,12 +320,12 @@ public class HaydenDanielTestTask1 {
  		ArrayList<Period> discountPeriods = new ArrayList<Period>();
  		ArrayList<Period> normalPeriods = new ArrayList<Period>();
  		Period normalPeriod1 = new Period(8,9);
- 		Period normalPeriod2 = new Period(21,00);
+ 		Period normalPeriod2 = new Period(21,23);
  		normalPeriods.add(normalPeriod1);
  		normalPeriods.add(normalPeriod2);
  		Period discountPeriod1 = new Period(9,21);
  		discountPeriods.add(discountPeriod1);
-        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(1),discountPeriods,normalPeriods);
+        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2),new BigDecimal(1),discountPeriods,normalPeriods);
      }
      
      //Test 34
@@ -332,12 +335,12 @@ public class HaydenDanielTestTask1 {
  		ArrayList<Period> discountPeriods = new ArrayList<Period>();
  		ArrayList<Period> normalPeriods = new ArrayList<Period>();
  		Period discountPeriod1 = new Period(8,9);
- 		Period discountPeriod2 = new Period(21,00);
+ 		Period discountPeriod2 = new Period(21,23);
  		discountPeriods.add(discountPeriod1);
  		discountPeriods.add(discountPeriod2);
- 		Period normalPeriod1 = new Period(21,00);
+ 		Period normalPeriod1 = new Period(21,23);
  		normalPeriods.add(normalPeriod1);
-        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(1),discountPeriods,normalPeriods);
+        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2),new BigDecimal(1),discountPeriods,normalPeriods);
      }
      
      //Test 35
@@ -347,12 +350,12 @@ public class HaydenDanielTestTask1 {
  		ArrayList<Period> discountPeriods = new ArrayList<Period>();
  		ArrayList<Period> normalPeriods = new ArrayList<Period>();
  		Period normalPeriod1 = new Period(8,10);
- 		Period normalPeriod2 = new Period(1,5);
+ 		Period normalPeriod2 = new Period(14,15);
  		normalPeriods.add(normalPeriod1);
  		normalPeriods.add(normalPeriod2);
- 		Period discountPeriod1 = new Period(9,21);
+ 		Period discountPeriod1 = new Period(16,17);
  		normalPeriods.add(discountPeriod1);
-        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(1),discountPeriods,normalPeriods);
+        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2),new BigDecimal(1),discountPeriods,normalPeriods);
      }
 
      //Test 36
@@ -367,7 +370,7 @@ public class HaydenDanielTestTask1 {
  		normalPeriods.add(normalPeriod2);
  		Period discountPeriod1 = new Period(9,21);
  		discountPeriods.add(discountPeriod1);
-        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(1),discountPeriods,normalPeriods);
+        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2),new BigDecimal(1),discountPeriods,normalPeriods);
      }
      
      //Test 37
@@ -379,7 +382,7 @@ public class HaydenDanielTestTask1 {
  		normalPeriods.add(null);
  		Period discountPeriod1 = new Period(8,9);
  		discountPeriods.add(discountPeriod1);
-        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(1),discountPeriods,normalPeriods);
+        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2),new BigDecimal(1),discountPeriods,normalPeriods);
      }
      
      //Test 38
@@ -388,7 +391,7 @@ public class HaydenDanielTestTask1 {
      public void bothPeriodArraysEmpty(){	
  		ArrayList<Period> discountPeriodsEmpty = new ArrayList<Period>();
  		ArrayList<Period> normalPeriodsEmpty = new ArrayList<Period>();
-        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1),new BigDecimal(1),discountPeriodsEmpty,normalPeriodsEmpty);
+        new Rate(CarParkKind.MANAGEMENT, new BigDecimal(2),new BigDecimal(1),discountPeriodsEmpty,normalPeriodsEmpty);
      }
      
      //Calculate Charge Tests
@@ -401,7 +404,7 @@ public class HaydenDanielTestTask1 {
  		ArrayList<Period> normalPeriods = new ArrayList<Period>();
  		
  		Period discountPeriod1 = new Period(8,9);
- 		Period discountPeriod2 = new Period(21,00);
+ 		Period discountPeriod2 = new Period(21,23);
  		Period normalPeriod = new Period(9,21);
  		
  		normalPeriods.add(normalPeriod);
@@ -410,8 +413,8 @@ public class HaydenDanielTestTask1 {
  		
  		Period stayPeriod = new Period(8,9);
  		
-         Rate rate = new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1), new BigDecimal(2), discountPeriods,normalPeriods);
-         assertEquals(BigDecimal.valueOf(3), rate.calculate(stayPeriod));
+         Rate rate = new Rate(CarParkKind.MANAGEMENT, new BigDecimal(5), new BigDecimal(2), discountPeriods,normalPeriods);
+         assertEquals(BigDecimal.valueOf(2), rate.calculate(stayPeriod));
      }
      
      //Test 2
@@ -422,17 +425,17 @@ public class HaydenDanielTestTask1 {
  		ArrayList<Period> normalPeriods = new ArrayList<Period>();
  		
  		Period discountPeriod1 = new Period(8,9);
- 		Period discountPeriod2 = new Period(21,00);
+ 		Period discountPeriod2 = new Period(21,23);
  		Period normalPeriod = new Period(9,21);
  		
  		normalPeriods.add(normalPeriod);
  		discountPeriods.add(discountPeriod1);
  		discountPeriods.add(discountPeriod2);
  		
- 		Period stayPeriod = new Period(21,00);
+ 		Period stayPeriod = new Period(21,23);
  		
-         Rate rate = new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1), new BigDecimal(2), discountPeriods,normalPeriods);
-         assertEquals(BigDecimal.valueOf(6), rate.calculate(stayPeriod));
+         Rate rate = new Rate(CarParkKind.MANAGEMENT, new BigDecimal(5), new BigDecimal(2), discountPeriods,normalPeriods);
+         assertEquals(BigDecimal.valueOf(4), rate.calculate(stayPeriod));
      }
 
      //Test 3
@@ -443,7 +446,7 @@ public class HaydenDanielTestTask1 {
  		ArrayList<Period> normalPeriods = new ArrayList<Period>();
  		
  		Period discountPeriod1 = new Period(8,9);
- 		Period discountPeriod2 = new Period(21,00);
+ 		Period discountPeriod2 = new Period(21,23);
  		Period normalPeriod = new Period(9,21);
  		
  		normalPeriods.add(normalPeriod);
@@ -452,7 +455,7 @@ public class HaydenDanielTestTask1 {
  		
  		Period stayPeriod = new Period(8,9);
  		
-         Rate rate = new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1), new BigDecimal(2), discountPeriods,normalPeriods);
+         Rate rate = new Rate(CarParkKind.MANAGEMENT, new BigDecimal(5), new BigDecimal(2), discountPeriods,normalPeriods);
          assertEquals(BigDecimal.valueOf(2), rate.calculate(stayPeriod));
      }
      
@@ -464,7 +467,7 @@ public class HaydenDanielTestTask1 {
  		ArrayList<Period> normalPeriods = new ArrayList<Period>();
  		
  		Period discountPeriod1 = new Period(8,9);
- 		Period discountPeriod2 = new Period(21,00);
+ 		Period discountPeriod2 = new Period(21,23);
  		Period normalPeriod = new Period(9,21);
  		
  		normalPeriods.add(normalPeriod);
@@ -473,7 +476,15 @@ public class HaydenDanielTestTask1 {
  		
  		Period stayPeriod = new Period(9,21);
  		
-         Rate rate = new Rate(CarParkKind.MANAGEMENT, new BigDecimal(1), new BigDecimal(2), discountPeriods,normalPeriods);
+         Rate rate = new Rate(CarParkKind.MANAGEMENT, new BigDecimal(5), new BigDecimal(2), discountPeriods,normalPeriods);
          assertEquals(BigDecimal.valueOf(48), rate.calculate(stayPeriod));
      }
+   
+ 	//Test 2.1
+ 	//Check that if the normal rate is negative, an IllegalArgumentException exception will be thrown.
+ 	@org.junit.Test (expected = NullPointerException.class)
+     public void normalRatePeriodNull(){
+         new Rate(CarParkKind.MANAGEMENT, new BigDecimal(6), new BigDecimal(2), discountPeriods, null);
+     }
+     
 }

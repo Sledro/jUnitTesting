@@ -1,42 +1,68 @@
+//package cm;
+
+import java.util.List;
+
 /**
- * Created by Daniel Hayden on 08/02/2018.
- * Student Number: C00137009
- * Email: dan@sledro.com
+ * Created by CM on 01/02/2018.
  */
-
 public class Period {
+    private int startHour;
+    private int endHour;
 
-	int start;
-	int end;
-	
-	Period(){
-		setStart(0);
-		setEnd(0);
-	}
-	
-	Period(int start, int end){
-		setStart(start);
-		setEnd(end);
-	}
-	
-	public int duration(){
-		return 5;
-	}
+    public Period(int start, int end) {
+        if (start >= end) {
+            throw new IllegalArgumentException("start of period cannot be later or equal to end of period");
+        }
+        if (start < 0 || start > 24 || end < 0 || end > 24) {
+            throw new IllegalArgumentException("start of period and end of period msut be between 0 and 23");
+        }
+        this.startHour = start;
+        this.endHour = end;
+    }
 
-	public int getStart() {
-		return start;
-	}
+    /**
+     * checks if a given hour is within the period
+     * @param hour the start of the hour to check
+     * @return true if the hour is within the period
+     */
+    private Boolean isIn(int hour) {
+        return hour >= this.startHour && hour < this.endHour;
+    }
 
-	public void setStart(int start) {
-		this.start = start;
-	}
+    private static Boolean isIn(int hour, List<Period> list) {
+        Boolean isIn = false;
+        int i = 0;
+        while (i < list.size() && !isIn) {
+            isIn = list.get(i).isIn(hour);
+            i++;
+        }
+        return isIn;
+    }
 
-	public int getEnd() {
-		return end;
-	}
+    /**
+     * The duration of a period
+     * @return the number of whole hours a this period covers
+     */
+    public int duration() {
+        return this.endHour - this.startHour;
+    }
 
-	public void setEnd(int end) {
-		this.end = end;
-	}
-		
+    /**
+     * Returns the numbers of hours this period is included in the list
+     * @param list the list of periods to check
+     * @return the number of full hours covered by this period
+     */
+    public int occurences(List<Period> list) {
+        int occurences = 0;
+        for (int hour = this.startHour; hour < this.endHour; hour++) {
+            if (isIn(hour, list)) {
+                occurences++;
+            }
+        }
+        return occurences;
+    }
+
+    public boolean overlaps(Period period) {
+        return this.endHour>period.startHour && this.startHour<period.endHour;
+    }
 }
